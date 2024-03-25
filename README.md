@@ -36,17 +36,17 @@ In this
 - Install the firebase cli for device.
      - In macOS run in terminal with node.js
      
-`npm install -g firebase-tools`
+          `npm install -g firebase-tools`
 
      - In Window run in terminal with node.js
 
-`npm install -g firebase-tools`
+               `npm install -g firebase-tools`
 
 - After this follow the documentation on:
 
-`https://firebase.google.com/docs/flutter/setup`
+          `https://firebase.google.com/docs/flutter/setup`
 
 - If the app fails in ios 
      - cd ios in terminal and run
 
-`pod install --repo-update`
+               `pod install --repo-update`
