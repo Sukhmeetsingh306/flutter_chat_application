@@ -1,7 +1,8 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, avoid_print
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_application/widget/user_image_picker_widget.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -80,6 +81,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          if (!_isLogin) const UserImagePickerWidget(),
                           TextFormField(
                             decoration: const InputDecoration(
                               labelText: 'Email',

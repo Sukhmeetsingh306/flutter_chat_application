@@ -50,3 +50,14 @@ In this
      - cd ios in terminal and run
 
                `pod install --repo-update`
+
+This code uses the Firebase as some basic needs from Firebase
+     - Activate Authentication 
+          - For email and password
+     - Activate the Storage in Production 
+          - For Upload images
+               - In rules of the storage change 
+               [write: if false] to [write: if request.auth != null]
+               as per security
+
+- Please add all the requirements of the dependencies for them to work
