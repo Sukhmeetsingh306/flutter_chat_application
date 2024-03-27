@@ -60,4 +60,7 @@ This code uses the Firebase as some basic needs from Firebase
                [write: if false] to [write: if request.auth != null]
                as per security
 
+- For the database we will use the FireStore database from firebase
+
+
 - Please add all the requirements of the dependencies for them to work
