@@ -22,6 +22,7 @@ class _AuthScreenState extends State<AuthScreen> {
   var _isLogin = true;
   var _enteredEmail = '';
   var _enteredPassword = '';
+  var _enteredUsername = '';
   File? _selectedImage;
   var _isAuthenticationUploading = false;
 
@@ -65,11 +66,12 @@ class _AuthScreenState extends State<AuthScreen> {
 
         await FirebaseFirestore.instance
             .collection('users')
-            .doc(userCredentials.user!.uid).set({
-              'username':'Will do something',
-              'email':_enteredEmail,
-              'imageUrl':imageUrl,
-            });
+            .doc(userCredentials.user!.uid)
+            .set({
+          'username': _enteredUsername,
+          'email': _enteredEmail,
+          'imageUrl': imageUrl,
+        });
       }
     } on FirebaseAuthException catch (error) {
       if (error.code == 'email-already-in-use') {}
@@ -120,6 +122,23 @@ class _AuthScreenState extends State<AuthScreen> {
                             UserImagePickerWidget(
                               onPickedImage: (pickedImage) {
                                 _selectedImage = pickedImage;
+                              },
+                            ),
+                          if (!_isLogin)
+                            TextFormField(
+                              decoration:
+                                  const InputDecoration(labelText: 'Username'),
+                              enableSuggestions: false,
+                              validator: (value) {
+                                if (value == null ||
+                                    value.trim().length < 2 ||
+                                    value.isEmpty) {
+                                  return 'Please enter a valid Name';
+                                }
+                                return null;
+                              },
+                              onSaved: (newValue) {
+                                _enteredUsername = newValue!;
                               },
                             ),
                           TextFormField(
