@@ -1,8 +1,9 @@
-// ignore_for_file: use_build_context_synchronously, avoid_print
+// ignore_for_file: use_build_context_synchronously
 
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_application/widget/user_image_picker_widget.dart';
 
@@ -44,7 +45,19 @@ class _AuthScreenState extends State<AuthScreen> {
           email: _enteredEmail,
           password: _enteredPassword,
         );
-        print(userCredentials);
+
+        // code for adding the image in the firebase as firebase don't give direct access
+
+        final storageRef = FirebaseStorage.instance
+            .ref()
+            .child('user_images')
+            .child('${userCredentials.user!.uid}.jpg');
+        // this will store the image in the firebase with the id
+        await storageRef.putFile(
+            _selectedImage!); // this will store the image in the firebase
+        final imageUrl = await storageRef
+            .getDownloadURL(); // this help later in taking the image from the firebase
+        print(imageUrl);
       }
     } on FirebaseAuthException catch (error) {
       if (error.code == 'email-already-in-use') {}
@@ -91,7 +104,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           if (!_isLogin)
                             UserImagePickerWidget(
                               onPickedImage: (pickedImage) {
-                                _selectedImage = _selectedImage;
+                                _selectedImage = pickedImage;
                               },
                             ),
                           TextFormField(
