@@ -26,6 +26,7 @@ class _NewMessageState extends State<NewMessage> {
       return;
     } // this will not send the message to firebase
 
+    // this is closing the keyboard on send button
     FocusScope.of(context).unfocus();
     _messageController.clear();
 
