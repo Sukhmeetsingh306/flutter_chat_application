@@ -66,12 +66,12 @@ class _AuthScreenState extends State<AuthScreen> {
 
         await FirebaseFirestore.instance
             .collection('users')
-            .doc(userCredentials.user!.uid)
+            .doc(userCredentials.user!.uid) 
             .set({
           'username': _enteredUsername,
           'email': _enteredEmail,
           'imageUrl': imageUrl,
-        });
+        });//this give the name according to the user credentials
       }
     } on FirebaseAuthException catch (error) {
       if (error.code == 'email-already-in-use') {}
